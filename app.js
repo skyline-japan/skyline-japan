@@ -32,10 +32,10 @@ function developerGroupNames(b){const text=(b.filterDevelopers||b.construction?.
 function matchesDeveloper(b,key){const groups=developerGroupNames(b);return !key||(key==='other'?groups.length===0:groups.includes(key));}
 function developerOptions(){const groups=majorDevelopers.map(g=>[g.key,`${g.label}（${buildings.filter(b=>developerGroupNames(b).includes(g.key)).length}棟）`]);groups.push(['other',`その他（${buildings.filter(b=>!developerGroupNames(b).length).length}棟）`]);return groups;}
 const defaults={q:'',pref:'',band:'',city:'',access:'',decade:'',developer:'',contractor:'',use:'',range:'',hotel:false,sort:'height',dir:'desc',view:'table'};
-let saved={};try{saved=JSON.parse(sessionStorage.getItem('skyline-filters-v8')||'{}')}catch(e){}
+let saved={};try{const nav=performance.getEntriesByType&&performance.getEntriesByType('navigation')[0];const internal=document.referrer&&new URL(document.referrer).origin===location.origin&&new URL(document.referrer).pathname!==location.pathname;const back=nav&&nav.type==='back_forward';const raw=JSON.parse(sessionStorage.getItem('skyline-filters-v8')||'{}');if((internal||back)&&raw&&raw.t&&Date.now()-raw.t<1800000)saved=raw.s||{};else sessionStorage.removeItem('skyline-filters-v8');}catch(e){}
 if(saved.developer&&!majorDevelopers.some(g=>g.key===saved.developer)&&saved.developer!=='other'){const old=saved.developer.normalize('NFKC');saved.developer=majorDevelopers.find(g=>g.aliases.some(n=>old.includes(n)))?.key||'other';}
 let state={...defaults,...saved},currentPage='',currentBuilding=null,homeScroll=0;
-function saveState(){try{sessionStorage.setItem('skyline-filters-v8',JSON.stringify(state))}catch(e){}}
+function saveState(){try{sessionStorage.setItem('skyline-filters-v8',JSON.stringify({t:Date.now(),s:state}))}catch(e){}}
 const developerLabel=b=>(b.filterDevelopers||b.construction?.developers||[]).filter(n=>n&&!/未確認|不明|市街地再開発組合/.test(n)).map(companyKey).slice(0,2).join(' / ')||'公開資料では確認できず';
 function uses(b){if(b.tags?.length)return b.tags;const c=b.contents||{},f=(b.floorComposition||[]).join(' '),a=[];if(c.offices?.length||/オフィス/.test(f))a.push('オフィス');if(c.hotels?.length)a.push('ホテル');if(/住宅|レジデンス|マンション/.test((b.use||'')+f))a.push('住宅');return a.length?a:[b.use||'複合'];}
 const contractors=b=>(b.construction?.filterContractors||b.construction?.contractors||[]).map(companyKey).filter(n=>!(/未確認|不明|確認できず/.test(n)));

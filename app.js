@@ -9,7 +9,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const safeUrl=u=>/^https:\/\//i.test(String(u||''))?String(u):'#';
 const link=(url,label)=>`<a href="${esc(safeUrl(url))}" target="_blank" rel="noopener noreferrer">${label} ↗</a>`;
 const credit=i=>i.credit?`${link(i.source,esc(i.credit))} · ${link(i.licenseUrl,'ライセンス：'+esc(i.license))}`:`${i.title?'「'+esc(i.title)+'」 ':''}${link(i.source,esc(i.author)+' / Wikimedia Commons')} · ${link(i.licenseUrl,esc(i.license))}${i.changes?' · '+esc(i.changes):''}`;
-function thumbUrl(i,w){const u=String(i?.url||'').split('?')[0],m=u.match(/^https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\/(\w\/\w\w)\/(.+)$/);if(!m||(i.w&&i.w<=w))return u;const f=m[2],ext=/\.(jpe?g|png|gif|webp)$/i.test(f)?'':(/\.svg$/i.test(f)?'.png':'.jpg');return `https://upload.wikimedia.org/wikipedia/commons/thumb/${m[1]}/${f}/${w}px-${f}${ext}`;}
+function thumbUrl(i,w){if(i?.host==='flickr')return String(i.url||'');const u=String(i?.url||'').split('?')[0],m=u.match(/^https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\/(\w\/\w\w)\/(.+)$/);if(!m||(i.w&&i.w<=w))return u;const f=m[2],ext=/\.(jpe?g|png|gif|webp)$/i.test(f)?'':(/\.svg$/i.test(f)?'.png':'.jpg');return `https://upload.wikimedia.org/wikipedia/commons/thumb/${m[1]}/${f}/${w}px-${f}${ext}`;}
 const PAGE=50;
 const bands=[['300:999','300m以上'],['250:299.99','250～300m'],['200:249.99','200～250m'],['180:199.99','180～200m'],['160:179.99','160～180m'],['140:159.99','140～160m'],['0:139.99','140m未満']];
 const routeLink=(id,label)=>`<a href="${U('building/'+id+'/')}">${esc(label)}</a>`;

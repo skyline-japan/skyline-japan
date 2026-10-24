@@ -30,14 +30,15 @@
 @media(min-width:1100px){.ranking-cards{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(max-width:680px){.rank-table td.building-cell{min-width:240px}.photo-frame.table-photo{width:64px;height:86px}.card-numbers{margin-bottom:0;justify-content:space-between;align-items:center}.card-numbers>span{font-size:14px}.card-photo .photo-wait svg{width:38px;height:53px}.photo-label{font-size:11px}}
 @media(prefers-reduced-motion:reduce){.photo-frame>img{transition:none}}
-/* Unified photo shapes: 4:3 for cards/thumbnails, 3:2 for detail hero. Lightbox keeps full image (contain). */
-.photo-frame>img{object-fit:cover;object-position:center 30%}
-#photo-body>.photo-frame>img{object-fit:contain;object-position:center}
+/* Unified photo shapes: 4:3 cards/thumbnails, 4:5 detail hero; whole building shown (contain) on a soft neutral backdrop. */
+.photo-frame{background:linear-gradient(180deg,#f4f6f8 0%,#e6ebef 100%)}
+.photo-frame>img{object-fit:contain;object-position:center}
 .rank-card .card-photo{aspect-ratio:4/3!important;height:auto!important;width:100%}
-.rank-table td.photo-cell{width:88px}.table-photo-link,.photo-frame.table-photo{width:64px!important;height:48px!important;min-height:48px!important;max-width:64px;aspect-ratio:4/3}
+.table-photo-link,.photo-frame.table-photo{width:64px!important;height:48px!important;min-height:48px!important;max-width:64px;aspect-ratio:4/3}
 .index-cover.table-photo{min-height:48px!important}
 .table-photo .photo-wait svg{width:22px;height:30px}.table-photo .photo-label{display:none}
-.photo-enlarge{height:auto!important;aspect-ratio:3/2}
-.photo-enlarge img{object-fit:cover;object-position:center 30%}
-@media(max-width:680px){.rank-card .card-photo{width:100px!important;height:75px!important;aspect-ratio:4/3!important}.card-photo .photo-wait svg{width:26px;height:36px}.card-photo .photo-label{font-size:10px}}
+.photo-enlarge{height:auto!important;aspect-ratio:4/5;max-height:640px}
+.photo-enlarge>.photo-frame{background:linear-gradient(180deg,#f4f6f8 0%,#e6ebef 100%)}
+.photo-enlarge img{object-fit:contain;object-position:center}
+@media(max-width:680px){.photo-enlarge{aspect-ratio:4/5;max-height:70vh;max-width:100%}.rank-card .card-photo{width:100px!important;height:75px!important;aspect-ratio:4/3!important}.card-photo .photo-wait svg{width:26px;height:36px}.card-photo .photo-label{font-size:10px}}
 @media(max-width:360px){.rank-card .card-photo{width:85px!important;height:64px!important}}

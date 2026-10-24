@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://USERNAME.github.io/skyline-japan/sitemap.xml
+Sitemap: https://skyline-japan.github.io/skyline-japan/sitemap.xml

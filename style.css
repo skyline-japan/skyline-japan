@@ -42,3 +42,10 @@
 .photo-enlarge img{object-fit:contain;object-position:center}
 @media(max-width:680px){.photo-enlarge{aspect-ratio:4/5;max-height:70vh;max-width:100%}.rank-card .card-photo{width:100px!important;height:75px!important;aspect-ratio:4/3!important}.card-photo .photo-wait svg{width:26px;height:36px}.card-photo .photo-label{font-size:10px}}
 @media(max-width:360px){.rank-card .card-photo{width:85px!important;height:64px!important}}
+/* uniform cropped ranking thumbnails */
+.rank-card .card-photo{aspect-ratio:3/4;background:#e6ebef;overflow:hidden}
+.rank-card .card-photo .photo-frame>img,.photo-frame.table-photo>img{object-fit:cover!important;object-position:center 40%!important}
+.photo-frame.table-photo{width:66px!important;height:88px!important;min-width:66px!important;max-width:66px!important;min-height:88px!important;flex:0 0 66px!important;aspect-ratio:3/4!important}
+.trim-note{font-size:.92em;color:var(--muted)}
+.trim-sitenote{font-size:14px!important}
+@media(max-width:680px){.rank-card{grid-template-columns:96px minmax(0,1fr)}.rank-card .card-photo{width:96px;height:128px;aspect-ratio:3/4}}
